@@ -1,0 +1,7 @@
+{
+  "name": "fig-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
