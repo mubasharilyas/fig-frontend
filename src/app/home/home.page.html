@@ -1,13 +1,275 @@
-<button (click)="show()" type="button"
-  class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Show</button>
+<!-- <button (click)="show()" type="button"
+  class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Show</button> -->
+
+<ion-content>
+
+  <header id="header" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 max-w-full max-h-screen">
+    <nav class="navbar navbar-expand-lg px-4">
+      <div class="block lg:hidden">
+        <a href="index.html" class="navbar-brand">
+          <img src="assets/images/logo.jpg"
+            class="sm:w-40 sm:h-24 w-28 h-20 rounded-tl-full rounded-tr-full rounded-br-full" alt="logo" />
+        </a>
+      </div>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
+        <span class="toggler-icon text-white">
+          <i class="fa-solid fa-bars md:fa-2x text-xl float-left"></i>
+        </span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul
+          class="navbar-nav text-capitalize lg:mx-auto float-left items-center md:gap-x-10 font-[Calligraffitti,cursive]">
+          <li class="nav-item active">
+            <a href="#header" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">About
+              Us</a>
+          </li>
+          <div class="lg:block hidden">
+            <a href="index.html" class="navbar-brand">
+              <img src="assets/images/logo.jpg" class="w-40 h-24 rounded-tl-full rounded-tr-full rounded-br-full"
+                alt="logo" />
+            </a>
+          </div>
+          <li class="nav-item">
+            <a href="#store" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
+              Up</a>
+          </li>
+          <li class="nav-item">
+            <a href="#services"
+              class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="flex justify-center md:my-12 my-3 mx-5 heading text-center">
+      <p class="text-white font-[Mali,cursive] md:text-2xl">
+        How can we help you achieve financial independence?
+      </p>
+    </div>
+    <form class="max-w-full md:pb-10 pb-8">
+      <div class="flex justify-center sm:flex-nowrap flex-wrap">
+        <div class="flex sm:w-7/12 w-full sm:mx-0 mx-3">
+          <input type="search" id="search-dropdown" [(ngModel)]="search" name="search"
+            class="block focus:outline-none placeholder:font-[cursive] p-2.5 w-100 sm:mx-1 mx-2 z-20 text-sm text-gray-900 bg-gray-50 rounded border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            placeholder="Search..." required="" />
+          <button type="submit"
+            class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              viewBox="0 0 24 24" class="w-6 h-6">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          <button class="bg-blue-500 sm:block hidden px-4 py-2 font-[Mali,cursive] text-white rounded"
+            (click)="searchBytag(search,'searchbox')">
+            Search
+          </button>
+        </div>
+      </div>
+    </form>
+  </header>
+  <!-- navbar end-->
+
+  <!-- carousel -->
+  <div class="max-w-full flex justify-center">
+    <div id="carouselExampleIndicators" class="carousel slide my-20 md:w-8/12 sm:w-9/12 w-full md:mx-0 mx-3"
+      data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div *ngFor="let tag of tags;let i = index" class="carousel-item cursor-pointer" [ngClass]="i==0?'active':''"
+          (click)="searchBytag(tag.name)">
+          <p class="text-center md:text-2xl font-[cursive]">
+            {{tag.name}}
+          </p>
+          <img class="d-block w-full h-96"
+            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            alt="First slide" />
+        </div>
+        <!-- <div class="carousel-item">
+          <p class="text-center md:text-2xl font-[cursive]">
+            Content Writing
+          </p>
+          <img class="d-block w-full h-96"
+            src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            alt="Second slide" />
+        </div>
+        <div class="carousel-item">
+          <p class="text-center md:text-2xl font-[cursive]">
+            Comfortable Zone
+          </p>
+          <img class="d-block w-full h-96"
+            src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            alt="Third slide" />
+        </div> -->
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <!-- carousel end -->
+
+  <!-- review -->
+  <div *ngIf="!isLoading && selectedCategory">
+    <div *ngFor="let individaul of individauls">
+      <div>
+        <p class="font-[cursive] text-center md:text-2xl font-bold">
+          {{individaul.name}}
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center md:justify-around mx-3">
+        <div class="sm:my-0 my-4 overflow-hidden">
+          <div class="transform hover:scale-110 transition-all border-2 border-gray-400">
+            <img [src]="individaul.images[0].file.url" class="w-56 h-56" alt="" />
+          </div>
+        </div>
+        <div class="my-4 md:mx-0 mx-3 leading-10 text-center font-[cursive]">
+          <p class="mb-0">
+            Protect your largest &nbsp;
+            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse">Click for more</span>
+          </p>
+          <a href="" class="text-blue">Contact Link</a>
+          <p>Its nice to work with this person</p>
+        </div>
+        <div class="md:my-4 my-2">
+          <p class="text-3xl font-[cursive] font-bold text-center">Rating</p>
+          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2 text-yellow-500"></i>
+          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2 text-yellow-500"></i>
+          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2 text-yellow-500"></i>
+          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2"></i>
+          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2"></i>
+          <div class="mt-4 flex justify-center">
+            <button
+              class="text-xl bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 duration-100 rounded text-white font-[cursive] font-bold px-4 py-3 bg-black">
+              Write Reviews
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <ion-spinner *ngIf="isLoading && selectedCategory" name="circles"></ion-spinner>
+    <div *ngIf="!isLoading && selectedCategory && individauls.length==0">No result found for {{selectedCategory}} </div>
+  </div>
+  <!-- review end -->
+
+  <!-- logo & button section -->
+  <!-- <div class="flex justify-center items-center my-4 animate-bounce">
+    <p class="font-[cursive] tex-2xl font-bold border-b-2 border-red-300">
+      Powered By
+    </p>
+    <a href=""><img src="assets/images/form-logo.png" alt="" /></a>
+  </div> -->
+  <!-- <div class="flex justify-center mb-3">
+    <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" href=""
+      class="px-4 py-3 font-[cursive] text-xl text-white rounded bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 duration-100 hover:no-underline">Write
+      a Review
+    </a>
+  </div> -->
+  <!-- logo & button section end -->
+
+  <!-- Modal on click -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Recipient:</label>
+              <input type="text" class="form-control" id="recipient-name" />
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal on click end-->
+
+  <!-- footer -->
+  <div class="bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 max-w-full md:h-96 h-full">
+    <div class="flex justify-center my-6">
+      <p class="font-[cursive] md:text-2xl font-bold border-b-2 border-red-300 pt-6 text-white">
+        Feed Your Inbox
+      </p>
+    </div>
+    <div class="flex justify-around flex-wrap">
+      <div class="mt-5">
+        <ul class="leading-9">
+          <li>
+            <a href=""
+              class="capitalize hover:no-underline hover:border-b-2 border-red-300 duration-150 text-white">privacy</a>
+          </li>
+          <li>
+            <a href=""
+              class="capitalize hover:no-underline hover:border-b-2 border-red-300 duration-150 text-white">terms
+              of services</a>
+          </li>
+          <li>
+            <a href=""
+              class="capitalize hover:no-underline hover:border-b-2 border-red-300 duration-150 text-white">contact
+              us</a>
+          </li>
+          <li>
+            <a href=""
+              class="capitalize hover:no-underline hover:border-b-2 border-red-300 duration-150 text-white">unsubscribe</a>
+          </li>
+        </ul>
+      </div>
+      <div class="md:w-5/12 md:my-0 my-5">
+        <div class="flex justify-between">
+          <div>
+            <p class="text-white">Email</p>
+          </div>
+          <div>
+            <p class="text-white">Subscribe</p>
+          </div>
+        </div>
+        <div class="border-b-2 border-white"></div>
+        <div class="flex gap-x-10 my-6">
+          <div class="animate-spin">
+            <a href=""><img src="assets/images/footer-instagram.png" class="w-16 h-16" alt="" /></a>
+          </div>
+          <div class="overflow-hidden animate-pulse">
+            <div class="transform hover:scale-110 transition-all">
+              <a href=""><img src="assets/images/footer-facebook.png" class="w-16 h-16" alt="" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<!-- footer end -->
 
 
 
 
-
-
-
-<div id="container">
+<!-- <div id="container">
   <input type="text" [(ngModel)]="search">
   <button (click)="searchBytag">Search</button>
-</div>
+</div> -->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import swell from 'swell-js'
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,9 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  search: String = ''
+  search: String = '';
+  selectedCategory = ''
+  isLoading = false;
   tags = [];
   individauls = []
   constructor(private api: ApiService) { }
@@ -15,14 +18,31 @@ export class HomePage implements OnInit {
     this.getTags()
   }
   getTags() {
-    this.api.get('https://personal-fig:klb655IIBPUJUCFNBVgRbRZUrim8oTzV@api.swell.store/categories').subscribe((res: any) => {
+    this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fcategories').subscribe((res: any) => {
       this.tags = res.results
     })
   }
-  searchBytag() {
-    this.api.get('https://personal-fig:klb655IIBPUJUCFNBVgRbRZUrim8oTzV@api.swell.store/products?category=' + this.search).subscribe((res: any) => {
+
+  // Initialize the client first
+
+  async searchBytag(tag, from = 'slide') {
+    if (from == 'searchbox') {
+      let category = this.tags.filter(x => x.name.includes(tag))[0]
+      this.selectedCategory = category ? category.name : tag;
+
+    }
+    else {
+      this.selectedCategory = tag
+      this.search = ''
+
+    }
+    this.isLoading = true
+    this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts?category=' + this.selectedCategory).subscribe((res: any) => {
       this.individauls = res.results
+      this.isLoading = false
+
     })
+
 
   }
 
