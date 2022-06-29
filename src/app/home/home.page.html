@@ -7,7 +7,7 @@
     <nav class="navbar navbar-expand-lg px-4">
       <div class="block lg:hidden">
         <a href="index.html" class="navbar-brand">
-          <img src="assets/images/logo.jpg"
+          <img src="assets/images/cb-logo.jpg"
             class="sm:w-40 sm:h-24 w-28 h-20 rounded-tl-full rounded-tr-full rounded-br-full" alt="logo" />
         </a>
       </div>
@@ -25,7 +25,7 @@
           </li>
           <div class="lg:block hidden">
             <a href="index.html" class="navbar-brand">
-              <img src="assets/images/logo.jpg" class="w-40 h-24 rounded-tl-full rounded-tr-full rounded-br-full"
+              <img src="assets/images/cb-logo.jpg" class="w-40 h-24 rounded-tl-full rounded-tr-full rounded-br-full"
                 alt="logo" />
             </a>
           </div>
@@ -69,7 +69,7 @@
   <!-- navbar end-->
 
   <!-- carousel -->
-  <div class="max-w-full flex justify-center">
+  <div *ngIf="tags.length>0" class="max-w-full flex justify-center">
     <div id="carouselExampleIndicators" class="carousel slide my-20 md:w-8/12 sm:w-9/12 w-full md:mx-0 mx-3"
       data-ride="carousel">
       <ol class="carousel-indicators">
@@ -114,6 +114,9 @@
       </a>
     </div>
   </div>
+  <div class="text-center">
+    <ion-spinner *ngIf="isLoading && !selectedCategory && tags.length==0" name="circles"></ion-spinner>
+  </div>
   <!-- carousel end -->
 
   <!-- review -->
@@ -131,12 +134,18 @@
           </div>
         </div>
         <div class="my-4 md:mx-0 mx-3 leading-10 text-center font-[cursive]">
-          <p class="mb-0">
-            Protect your largest &nbsp;
-            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse">Click for more</span>
+          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
+            {{individaul.isBioExpended?individaul.bio:individaul.bio.slice(0,100)}} &nbsp;
+            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
+              (click)="individaul.isBioExpended=!individaul.isBioExpended">{{individaul.isBioExpended?'Click for
+              less':'Click for more'}}</span>
           </p>
-          <a href="" class="text-blue">Contact Link</a>
-          <p>Its nice to work with this person</p>
+          <a href="" class="text-blue-400">Contact Link</a>
+          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">{{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp;
+            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
+              (click)="individaul.isReviewExpended=!individaul.isReviewExpended">{{individaul.isReviewExpended?'Click
+              for less':'Click for more'}}</span>
+          </p>
         </div>
         <div class="md:my-4 my-2">
           <p class="text-3xl font-[cursive] font-bold text-center">Rating</p>
