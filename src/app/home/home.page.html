@@ -141,7 +141,8 @@
               less':'Click for more'}}</span>
           </p>
           <a href="" class="text-blue-400">Contact Link</a>
-          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">{{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp;
+          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
+            {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp;
             <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
               (click)="individaul.isReviewExpended=!individaul.isReviewExpended">{{individaul.isReviewExpended?'Click
               for less':'Click for more'}}</span>
@@ -160,6 +161,10 @@
               Write Reviews
             </button>
           </div>
+          <yotpo-reviews-widget productId="1" price="1.50" name="Example Product" url="www.example.com" imageUrl=""
+            description="Something by Example"></yotpo-reviews-widget>
+
+
         </div>
       </div>
     </div>

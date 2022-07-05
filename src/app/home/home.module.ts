@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { NgYotpoModule } from '@ng-ecom-kit/ng-yotpo';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+     NgYotpoModule.forRoot({ apiKey: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2' })
   ],
   declarations: [HomePage]
 })
