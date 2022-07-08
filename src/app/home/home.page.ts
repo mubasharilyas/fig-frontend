@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import swell from 'swell-js'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -21,6 +21,7 @@ export class HomePage implements OnInit {
   reviewForm: FormGroup
   selectedProduct_id: any;
   selectedProduct_name: any;
+  @ViewChild('myModalClose') modalClose: ElementRef;
   constructor(private api: ApiService) { }
 
   onChange(event) {
@@ -141,6 +142,7 @@ export class HomePage implements OnInit {
 
     this.reviewForm.reset()
     this.userRating = 0
+    this.modalClose.nativeElement.click();
 
   }
 
@@ -167,7 +169,7 @@ export class HomePage implements OnInit {
 
     }
     this.isLoading = true
-    this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts?category=' + this.selectedCategory).subscribe((res: any) => {
+    this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts%3Fwhere%5Bactive%5D%3Dtrue%26category=' + this.selectedCategory).subscribe((res: any) => {
       this.individauls = res.results.map(ind => {
         ind.reviews = this.reviews.filter(x => x.sku == ind.id)
         ind.slicedReviews = ind.reviews.slice(0, 2)

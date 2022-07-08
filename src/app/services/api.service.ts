@@ -12,4 +12,8 @@ export class ApiService {
   get(url: any) {
     return this.http.get(url, { headers: this.headers })
   }
+  post(url:any,data){
+    return this.http.post(url,data, { headers: this.headers })
+
+  }
 }

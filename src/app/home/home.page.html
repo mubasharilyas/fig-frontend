@@ -30,7 +30,7 @@
             </a>
           </div>
           <li class="nav-item">
-            <a href="#store" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
+            <a href="sign-up" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
               Up</a>
           </li>
           <li class="nav-item">
@@ -143,7 +143,7 @@
             {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
           <br>
           <a href="" class="text-blue-400">Contact Link</a>
-          <div *ngIf="individaul.reviews.length>0">
+          <div class="flex items-center justify-center" *ngIf="individaul.reviews.length>0" >
             <span *ngIf="individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
               <!-- {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp; -->
               <p *ngFor="let r of individaul.reviews">{{r.content}}</p>
