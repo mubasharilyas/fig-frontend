@@ -64,11 +64,9 @@ export class HomePage implements OnInit {
       this.getReviews()
     }
     this.getTags()
-
-
   }
   getTags() {
-    this.isLoading = true
+    this.isLoading=true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fcategories').subscribe((res: any) => {
       this.tags = res.results
       console.log("tages:", this.tags)
