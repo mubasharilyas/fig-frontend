@@ -58,6 +58,7 @@ export class SignUpPage implements OnInit {
       "name": this.signUpForm.controls.name.value,
       "category_id": this.signUpForm.controls.catagary.value,
       "active": false,
+      "description": this.signUpForm.controls.bio.value,
       "images": [
         {
           "file": {
