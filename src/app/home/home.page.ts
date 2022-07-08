@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit,ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import swell from 'swell-js'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -21,6 +21,7 @@ export class HomePage implements OnInit {
   reviewForm: FormGroup
   selectedProduct_id: any;
   selectedProduct_name: any;
+  @ViewChild('myModalClose') modalClose:ElementRef;
   constructor(private api: ApiService) { }
 
   onChange(event) {
@@ -131,16 +132,17 @@ export class HomePage implements OnInit {
     };
     console.log('formData:', this.reviewForm.value)
 
-    fetch('https://api.yotpo.com/v1/widget/reviews', options)
-      .then(response => response.json())
-      .then(response => {
+    // fetch('https://api.yotpo.com/v1/widget/reviews', options)
+    //   .then(response => response.json())
+    //   .then(response => {
 
-        console.log("Api response:",response)
-      })
-      .catch(err => console.error(err));
+    //     console.log("Api response:",response)
+    //   })
+    //   .catch(err => console.error(err));
 
     this.reviewForm.reset()
     this.userRating = 0
+    this.modalClose.nativeElement.click();
 
   }
 
