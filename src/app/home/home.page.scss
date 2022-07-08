@@ -25,3 +25,25 @@
 #container a {
   text-decoration: none;
 }
+
+.filled{
+  color: rgb(249, 180, 6)
+}
+.defaultstar{
+  position: relative;
+  display: inline-block;
+  color: gray;
+  font-size: 31px;
+}
+.paintStar{
+  position: absolute;
+  display: inline-block;
+  color: rgb(249, 180, 6);
+  overflow: hidden;
+}
+.userDefaultstar{
+  position: relative;
+  display: inline-block;
+  color: gray;
+  font-size: 15px;
+}

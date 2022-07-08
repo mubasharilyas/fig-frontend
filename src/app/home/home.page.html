@@ -121,7 +121,7 @@
 
   <!-- review -->
   <div *ngIf="!isLoading && selectedCategory">
-    <div *ngFor="let individaul of individauls">
+    <div *ngFor="let individaul of individauls; let i = index;">
       <div>
         <p class="font-[cursive] text-center md:text-2xl font-bold">
           {{individaul.name}}
@@ -137,34 +137,58 @@
           <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
             {{individaul.isBioExpended?individaul.bio:individaul.bio.slice(0,100)}} &nbsp;
             <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
-              (click)="individaul.isBioExpended=!individaul.isBioExpended">{{individaul.isBioExpended?'Click for
-              less':'Click for more'}}</span>
+              (click)="individaul.isBioExpended=!individaul.isBioExpended">
+              {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
           </p>
           <a href="" class="text-blue-400">Contact Link</a>
-          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
-            {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp;
-            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
-              (click)="individaul.isReviewExpended=!individaul.isReviewExpended">{{individaul.isReviewExpended?'Click
-              for less':'Click for more'}}</span>
-          </p>
+          <div *ngIf="individaul.reviews.length>0">
+            <span *ngIf="individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
+              <!-- {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp; -->
+              <p *ngFor="let r of individaul.reviews">{{r.content}}</p>
+              <span class="mx-2 cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
+                (click)="individaul.isReviewExpended=!individaul.isReviewExpended">
+                {{individaul.isReviewExpended?'Click for less':'Click for more'}}</span>
+            </span>
+            <span *ngIf="!individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
+              <!-- {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp; -->
+              <p *ngFor="let r of individaul.slicedReviews">{{r.content}}</p>
+              <span class="mx-2 cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
+                (click)="individaul.isReviewExpended=!individaul.isReviewExpended">
+                {{individaul.isReviewExpended?'Click for less':'Click for more'}}</span>
+            </span>
+          </div>
         </div>
         <div class="md:my-4 my-2">
-          <p class="text-3xl font-[cursive] font-bold text-center">Rating</p>
-          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2 text-yellow-500"></i>
-          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2 text-yellow-500"></i>
-          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2 text-yellow-500"></i>
-          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2"></i>
-          <i class="fa-solid fa-star md:fa-3x fa-2x mt-2"></i>
+          <div>
+            <ngb-rating [max]="5" [(rate)]="individaul.averageProductReview" [readonly]="true">
+              <ng-template let-fill="fill">
+                <span class="defaultstar" [class.filled]="fill===100">
+                  <span class="paintStar" [style.width.%]="fill"><i class="fa-solid fa-star"></i></span><i
+                    class="fa-solid fa-star"></i>
+                </span>
+              </ng-template>
+            </ngb-rating>
+          </div>
+
+
           <div class="mt-4 flex justify-center">
-            <button
+            <button (click)="getProduct(individaul)" data-toggle="modal" data-target="#exampleModal"
+              data-whatever="@mdo"
               class="text-xl bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 duration-100 rounded text-white font-[cursive] font-bold px-4 py-3 bg-black">
               Write Reviews
             </button>
+
+            <!-- <div class="flex justify-center mb-3">
+              <a data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" href=""
+                class="px-4 py-3 font-[cursive] text-xl text-white rounded bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 duration-100 hover:no-underline">Write
+                a Review
+              </a>
+            </div> -->
+
+
+
           </div>
-          <yotpo-reviews-widget productId="1" price="1.50" name="Example Product" url="www.example.com" imageUrl=""
-            description="Something by Example"></yotpo-reviews-widget>
-
-
+       
         </div>
       </div>
     </div>
@@ -190,39 +214,7 @@
   </div> -->
   <!-- logo & button section end -->
 
-  <!-- Modal on click -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Recipient:</label>
-              <input type="text" class="form-control" id="recipient-name" />
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Send message</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal on click end-->
+
 
   <!-- footer -->
   <div class="bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 max-w-full md:h-96 h-full">
@@ -277,6 +269,7 @@
       </div>
     </div>
   </div>
+
 </ion-content>
 <!-- footer end -->
 
@@ -287,3 +280,68 @@
   <input type="text" [(ngModel)]="search">
   <button (click)="searchBytag">Search</button>
 </div> -->
+
+
+<!-- Modal on click -->
+
+<div class="modal fade" id="exampleModal" data-backdrop="false" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mx-1">
+          <p class="text-gray-400 mt-3">
+            <span class="text-red-400 text-xl">*</span> Score:
+          </p>
+          <div style="color: rgb(249, 180, 6); font-size: 30px;">
+            <ngb-rating [max]="5" [(rate)]="userRating" (rateChange)="onChange($event)" [readonly]="false">
+              <!-- <ng-template let-fill="fill">
+                <span class="userDefaultstar" [class.filled]="fill===100">
+                  <span class="paintStar" [style.width.%]="fill"><i class="fa-solid fa-star"></i></span><i class="fa-solid fa-star"></i>
+                </span>
+              </ng-template> -->
+            </ngb-rating>
+          </div>
+          <form [formGroup]="reviewForm">
+            <div class="form-group my-3">
+              <label for="recipient-name" class="col-form-label mb-2 text-gray-400"><span
+                  class="text-red-400 text-xl">*</span> Title:</label>
+              <input type="text" class="form-control border-current" formControlName="title" />
+            </div>
+            <div class="form-group my-3">
+              <label for="message-text" class="col-form-label mb-2 text-gray-400"><span
+                  class="text-red-400 text-xl">*</span>Review:</label>
+              <textarea class="form-control" formControlName="review"></textarea>
+            </div>
+            <div class="form-group my-4">
+              <label for="recipient-name" class="col-form-label mb-2 text-gray-400">
+                <span class="text-red-400 text-xl">*</span>Enter your name:</label>
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+            <div class="form-group my-3">
+              <label for="recipient-name" class="col-form-label mb-2 text-gray-400"><span
+                  class="text-red-400 text-xl">*</span> Email:</label>
+              <input type="text" class="form-control" formControlName="email" />
+            </div>
+            <div class="flex sm:justify-end justify-center">
+              <button class="mx-2 btn btn-secondary " data-dismiss="modal">
+                Cancel
+              </button>
+              <button [disabled]="reviewForm.invalid" class="btn btn-primary text-white" (click)="createReview()">
+                POST
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Modal on click end-->
