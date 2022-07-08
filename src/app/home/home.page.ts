@@ -66,7 +66,7 @@ export class HomePage implements OnInit {
     this.getTags()
   }
   getTags() {
-    this.isLoading=true
+    this.isLoading = true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fcategories').subscribe((res: any) => {
       this.tags = res.results
       console.log("tages:", this.tags)
@@ -135,7 +135,7 @@ export class HomePage implements OnInit {
       .then(response => response.json())
       .then(response => {
 
-        console.log("Api response:",response)
+        console.log("Api response:", response)
       })
       .catch(err => console.error(err));
 
@@ -144,12 +144,12 @@ export class HomePage implements OnInit {
 
   }
 
-  getProduct(product){
-    this.selectedProduct_id=product.id
-    this.selectedProduct_name=product.name
+  getProduct(product) {
+    this.selectedProduct_id = product.id
+    this.selectedProduct_name = product.name
 
-    console.log("product id",this.selectedProduct_id)
-    console.log("product name",this.selectedProduct_name)
+    console.log("product id", this.selectedProduct_id)
+    console.log("product name", this.selectedProduct_name)
   }
 
 
@@ -157,7 +157,7 @@ export class HomePage implements OnInit {
 
   async searchBytag(tag, from = 'slide') {
     if (from == 'searchbox') {
-      let category = this.tags.filter(x => x.name.includes(tag))[0]
+      let category = this.tags.filter(x => x.name.toLowerCase().includes(tag.toLowerCase()))[0]
       this.selectedCategory = category ? category.name : tag;
 
     }
@@ -173,9 +173,10 @@ export class HomePage implements OnInit {
         ind.slicedReviews = ind.reviews.slice(0, 2)
         console.log("reviews:", ind.reviews)
         ind.averageProductReview = this.averageRatingCalculation(ind.reviews)
+        ind.averageProductReview = ind.averageProductReview ? ind.averageProductReview : 0
         console.log("avgrege:", ind.averageProductReview)
         console.log(ind)
-        ind.bio = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries`;
+        // ind.bio = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries`;
 
         ind.isBioExpended = false;
         ind.isReviewExpended = false
