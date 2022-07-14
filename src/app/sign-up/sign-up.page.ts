@@ -53,6 +53,25 @@ tags: any;
     console.log('singform:',this.imageForm.value)
     console.log('file name:',this.fileName)
     console.log('file name:',this.filetype)
+    let data={
+      "name": this.signUpForm.controls.name.value,
+      "category_id":this.signUpForm.controls.catagary.value,
+      "active": false,
+      "email": 'hafiz@gmail.com',
+      "phone_no": 443545342,
+      "images": [
+          {
+              "file": {
+                  "content_type": this.filetype,
+                  "filename": this.fileName,
+                  "data":this.url
+              }
+          }
+      ]
+  }
+    this.api.post('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts',data).subscribe((res)=>{
+      console.log("Response:",res)
+    })
 
   }
  
