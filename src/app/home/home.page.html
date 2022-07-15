@@ -8,7 +8,7 @@
       <div class="block lg:hidden">
         <a href="index.html" class="navbar-brand">
           <img src="assets/images/cb-logo.jpg"
-            class="sm:w-40 sm:h-24 w-28 h-20 rounded-tl-full rounded-tr-full rounded-br-full" alt="logo" />
+            class="sm:w-40 sm:h-24 w-28 h-20 " alt="logo" />
         </a>
       </div>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
@@ -20,12 +20,12 @@
         <ul
           class="navbar-nav text-capitalize lg:mx-auto float-left items-center md:gap-x-10 font-[Calligraffitti,cursive]">
           <li class="nav-item active">
-            <a href="#header" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">About
+            <a routerLink="/contact-us" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">About
               Us</a>
           </li>
           <div class="lg:block hidden">
             <a href="index.html" class="navbar-brand">
-              <img src="assets/images/cb-logo.jpg" class="w-40 h-24 rounded-tl-full rounded-tr-full rounded-br-full"
+              <img src="assets/images/cb-logo.jpg" class="w-40 h-24"
                 alt="logo" />
             </a>
           </div>
@@ -34,7 +34,7 @@
               Up</a>
           </li>
           <li class="nav-item">
-            <a href="#services"
+            <a routerLink="/login"
               class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Login</a>
           </li>
         </ul>
@@ -121,7 +121,7 @@
 
   <!-- review -->
   <div *ngIf="!isLoading && selectedCategory">
-    <div *ngFor="let individaul of individauls; let i = index;">
+    <div *ngFor="let individaul of individauls; let i = index;" class="mb-3" [ngClass]="i!=individauls.length-1?'border-b-2':''">
       <div>
         <p class="font-[cursive] text-center md:text-2xl font-bold">
           {{individaul.name}}
@@ -134,12 +134,14 @@
           </div>
         </div>
         <div class="my-4 md:mx-0 mx-3 leading-10 text-center font-[cursive]">
-          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
-            {{individaul.isBioExpended?individaul.bio:individaul.bio.slice(0,100)}} &nbsp;
-            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
-              (click)="individaul.isBioExpended=!individaul.isBioExpended">
-              {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
+          <p [innerHTML]="individaul.isBioExpended?individaul.description:individaul.description?individaul.description.slice(0,100):'Bio Not Provided'"
+            class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify ">
+
           </p>
+          <span *ngIf="individaul.description" class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
+            (click)="individaul.isBioExpended=!individaul.isBioExpended">
+            {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
+          <br>
           <a href="" class="text-blue-400">Contact Link</a>
           <div class="flex items-center justify-center" *ngIf="individaul.reviews.length>0" >
             <span *ngIf="individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
@@ -188,7 +190,7 @@
 
 
           </div>
-       
+
         </div>
       </div>
     </div>
@@ -289,8 +291,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Modal</h5>
-        <button type="button" class="close" #myModalClose data-dismiss="modal" aria-label="Close">
+        <h5>Create Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

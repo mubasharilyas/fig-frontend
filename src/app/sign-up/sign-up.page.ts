@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -8,31 +8,33 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
-url:any;
-fileName;
-filetype: any;
-imageForm:FormGroup
-signUpForm:FormGroup
-isLoading: boolean;
-tags: any;
-  constructor(private api:ApiService) { }
+  url: any = 'https://cdn.pixabay.com/photo/2016/04/22/04/57/graduation-1345143__340.png';
+  fileName;
+  filetype: any;
+  imageForm: FormGroup
+  signUpForm: FormGroup
+  isLoading: boolean;
+  tags: any;
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
- this.creatForm()
- this.getTags()
+    this.creatForm()
+    this.getTags()
 
   }
 
 
-  creatForm(){
-    this.signUpForm=new FormGroup({
-      name:new FormControl(''),
-      catagary:new FormControl(''),
-      bio:new FormControl(''),
-    
+  creatForm() {
+    this.signUpForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('',[Validators.required, Validators.email]),
+      phone: new FormControl('', Validators.required),
+      catagary: new FormControl('', Validators.required),
+      bio: new FormControl('', Validators.required),
+
     })
-    this.imageForm=new FormGroup({
-      image:new FormControl(''),
+    this.imageForm = new FormGroup({
+      image: new FormControl(''),
     })
 
   }
@@ -48,52 +50,56 @@ tags: any;
     })
   }
 
-  SignUp(){
-    console.log('singform:',this.signUpForm.value)
-    console.log('singform:',this.imageForm.value)
-    console.log('file name:',this.fileName)
-    console.log('file name:',this.filetype)
-    let data={
+  SignUp() {
+    this.isLoading = true
+    console.log('singform:', this.signUpForm.value)
+    console.log('singform:', this.imageForm.value)
+    console.log('file name:', this.fileName)
+    console.log('file name:', this.filetype)
+    let data = {
       "name": this.signUpForm.controls.name.value,
-      "category_id":this.signUpForm.controls.catagary.value,
+      "category_id": this.signUpForm.controls.catagary.value,
       "active": false,
-      "email": 'hafiz@gmail.com',
-      "phone_no": 443545342,
+      "description": this.signUpForm.controls.bio.value,
+      "email":this.signUpForm.controls.email.value,
+      "phone_no":this.signUpForm.controls.phone.value,
       "images": [
-          {
-              "file": {
-                  "content_type": this.filetype,
-                  "filename": this.fileName,
-                  "data":this.url
-              }
+        {
+          "file": {
+            "content_type": this.filetype,
+            "filename": this.fileName,
+            "data": this.url.substr(this.url.indexOf(',') + 1)
           }
+        }
       ]
-  }
-    this.api.post('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts',data).subscribe((res)=>{
-      console.log("Response:",res)
+    }
+    console.log(data)
+    this.api.post('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts', data).subscribe(res => {
+      console.log("Post Api Response",res)
+      this.isLoading = false
+
     })
 
   }
- 
 
 
-  onChangeFile(e:any){
+
+
+  onChangeFile(e: any) {
     var reader = new FileReader();
-     if(e.target.files&& e.target.files.length>0){
-      let file=e.target.files[0]
-      console.log('file:',file)
+    if (e.target.files && e.target.files.length > 0) {
+      let file = e.target.files[0]
+      console.log('file:', file)
       reader.readAsDataURL(file);
-      reader.onload= ()=>{
-        this.url=reader.result;
-        this.imageForm.get('image').setValue(this.url)
-        this.fileName=file.name
-        this.filetype=file.type
-        console.log("url:",this.url)
-        console.log('file name',this.fileName)
-      
+      reader.onload = () => {
+        this.url = reader.result;
+        this.fileName = file.name
+        this.filetype = file.type
+        console.log("url:", this.url)
+        console.log('file name', this.fileName)
+
+      }
     }
-    this.imageForm.get('image').setValue(this.url)
-  }
   }
 
 
