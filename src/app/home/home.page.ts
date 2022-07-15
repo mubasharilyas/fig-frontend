@@ -40,30 +40,27 @@ export class HomePage implements OnInit {
 
 
 
-    console.log(localStorage.getItem('yotpo_token'))
-    if (!localStorage.getItem('yotpo_token')) {
-      const options = {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          client_id: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2',
-          client_secret: 'SaChxK7jS9KSXGhyWejR7XgDAEmtdaaaieRkI2Vn',
-          grant_type: 'client_credentials'
-        })
-      };
 
-      fetch('https://api.yotpo.com/oauth/token', options)
-        .then(response => response.json())
-        .then(response => {
-          console.log(response)
-          localStorage.setItem('yotpo_token', response.access_token);
-          this.getReviews()
-        }
-        )
-        .catch(err => console.error(err));
-    } else {
-      this.getReviews()
-    }
+    const options = {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client_id: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2',
+        client_secret: 'SaChxK7jS9KSXGhyWejR7XgDAEmtdaaaieRkI2Vn',
+        grant_type: 'client_credentials'
+      })
+    };
+
+    fetch('https://api.yotpo.com/oauth/token', options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+        localStorage.setItem('yotpo_token', response.access_token);
+        this.getReviews()
+      }
+      )
+      .catch(err => console.error(err));
+
     this.getTags()
   }
   getTags() {
@@ -135,10 +132,14 @@ export class HomePage implements OnInit {
     fetch('https://api.yotpo.com/v1/widget/reviews', options)
       .then(response => response.json())
       .then(response => {
+        this.api.showToast('Review created successfuly', 'success');
 
         console.log("Api response:", response)
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        this.api.showToast('Something went wrong', 'error');
+
+      });
 
     this.reviewForm.reset()
     this.userRating = 0

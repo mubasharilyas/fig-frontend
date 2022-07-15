@@ -7,32 +7,31 @@ import { ToastController } from '@ionic/angular';
 })
 export class ApiService {
   headers = new HttpHeaders()
-  
-    
+
+
     .append('Access-Control-Allow-Origin', '*');
-    private myToast: any;
+  private myToast: any;
   constructor(private http: HttpClient, private toast: ToastController) { }
   get(url: any) {
     return this.http.get(url, { headers: this.headers })
   }
-  post(url:any,data){
-    return this.http.post(url,data, { headers: this.headers })
+  post(url: any, data) {
+    return this.http.post(url, data, { headers: this.headers })
 
   }
 
 
 
-  showToast() {
+  showToast(message, color) {
     this.myToast = this.toast.create({
-      message: 'Ionic Auto Hide Toast on Bottom',
+      message: message,
       duration: 5000,
-      position:'top',
-      color:'success',
-      cssClass:'creat-facility-toast',
-      
-      
+      position: 'top',
+      color: color,
+      cssClass: 'creat-facility-toast',
+
+
     }).then((toastData) => {
-      console.log(toastData);
       toastData.present();
     });
   }
