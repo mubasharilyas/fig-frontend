@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -15,6 +16,7 @@ export class SignUpPage implements OnInit {
   signUpForm: FormGroup
   isLoading: boolean;
   tags: any;
+ 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
@@ -26,9 +28,9 @@ export class SignUpPage implements OnInit {
 
   creatForm() {
     this.signUpForm = new FormGroup({
-      name: new FormControl(''),
-      catagary: new FormControl(''),
-      bio: new FormControl(''),
+      name: new FormControl('',[Validators.required]),
+      catagary: new FormControl('',[Validators.required]),
+      bio: new FormControl('',[Validators.required]),
 
     })
     this.imageForm = new FormGroup({
@@ -50,8 +52,9 @@ export class SignUpPage implements OnInit {
 
   SignUp() {
     this.isLoading = true
+
     console.log('singform:', this.signUpForm.value)
-    console.log('singform:', this.imageForm.value)
+    console.log('imageform:', this.imageForm.value)
     console.log('file name:', this.fileName)
     console.log('file name:', this.filetype)
     let data = {
@@ -69,11 +72,13 @@ export class SignUpPage implements OnInit {
         }
       ]
     }
+  
     console.log(data)
     this.api.post('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts', data).subscribe(res => {
       console.log(res)
+      this.api.showToast();
       this.isLoading = false
-
+ 
     })
 
   }
@@ -98,12 +103,18 @@ export class SignUpPage implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
+  // showMyToast() {
+  //   this.api.showToast();
+  // }
+  // hideMyToast() {
+  //   this.api.HideToast();
+  // }
+ 
 
 }
+
+
+
+
+
+
