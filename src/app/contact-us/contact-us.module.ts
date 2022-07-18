@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ContactUsPageRoutingModule } from './contact-us-routing.module';
 
 import { ContactUsPage } from './contact-us.page';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ContactUsPageRoutingModule
+    ContactUsPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [ContactUsPage]
 })
