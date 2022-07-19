@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
+// https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts
 export class ApiService {
   headers = new HttpHeaders()
 

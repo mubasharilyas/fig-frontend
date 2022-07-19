@@ -19,8 +19,7 @@ export class HomePage implements OnInit {
   userRating = 0;
   score;
   reviewForm: FormGroup
-  selectedProduct_id: any;
-  selectedProduct_name: any;
+  selectedProduct: any;
   @ViewChild('myModalClose') modalClose: ElementRef;
   constructor(private api: ApiService) { }
 
@@ -95,8 +94,7 @@ export class HomePage implements OnInit {
       method: 'GET',
       headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
     };
-
-    fetch('https://api.yotpo.com/v1/apps/9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2/reviews?utoken=' + localStorage.getItem('yotpo_token'), options)
+    fetch('https://api.yotpo.com/v1/apps/9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2/reviews?count=10000000000000&utoken=' + localStorage.getItem('yotpo_token'), options)
       .then(response => response.json())
       .then(response => {
         this.reviews = response.reviews
@@ -113,12 +111,12 @@ export class HomePage implements OnInit {
       headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
         appkey: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2',
-        domain: 'http://www.shop.com',
-        sku: this.selectedProduct_id,
-        product_title: this.selectedProduct_name,
-        product_description: 'Smart Phone',
-        product_url: 'http://www.shop.com/phone.html',
-        product_image_url: 'http://www.shop.com/phone.jpg',
+        domain: '',
+        sku: this.selectedProduct.id,
+        product_title: this.selectedProduct.name,
+        product_description: '',
+        product_url: '',
+        product_image_url: '',
         display_name: this.reviewForm.value.name,
         email: this.reviewForm.value.email,
         is_incentivized: true,
@@ -137,7 +135,7 @@ export class HomePage implements OnInit {
         console.log("Api response:", response)
       })
       .catch(err => {
-        this.api.showToast('Something went wrong', 'error');
+        this.api.showToast('Something went wrong', 'danger');
 
       });
 
@@ -148,27 +146,25 @@ export class HomePage implements OnInit {
   }
 
   getProduct(product) {
-    this.selectedProduct_id = product.id
-    this.selectedProduct_name = product.name
+    this.selectedProduct = product
 
-    console.log("product id", this.selectedProduct_id)
-    console.log("product name", this.selectedProduct_name)
+    console.log("product id", this.selectedProduct)
   }
 
 
   // Initialize the client first
 
   async searchBytag(tag, from = 'slide') {
-    if (from == 'searchbox') {
-      let category = this.tags.filter(x => x.name.toLowerCase().includes(tag.toLowerCase()))[0]
-      this.selectedCategory = category ? category.name : tag;
+    // if (from == 'searchbox') {
+    //   let category = this.tags.filter(x => x.name.toLowerCase().includes(tag.toLowerCase()))
+    //   this.selectedCategory = category ? category : tag;
+    //  console.log("category:",category)
+    // }
+    // else {
+    this.selectedCategory = tag
+    this.search = ''
 
-    }
-    else {
-      this.selectedCategory = tag
-      this.search = ''
-
-    }
+    // }
     this.isLoading = true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts%3Fwhere%5Bactive%5D%3Dtrue%26category=' + this.selectedCategory).subscribe((res: any) => {
       this.individauls = res.results.map(ind => {

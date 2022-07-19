@@ -28,9 +28,11 @@ export class SignUpPage implements OnInit {
 
   creatForm() {
     this.signUpForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      catagary: new FormControl('', [Validators.required]),
-      bio: new FormControl('', [Validators.required]),
+      name: new FormControl('', Validators.required),
+      email: new FormControl('',[Validators.required, Validators.email]),
+      phone: new FormControl('', Validators.required),
+      catagary: new FormControl('', Validators.required),
+      bio: new FormControl('', Validators.required),
 
     })
     this.imageForm = new FormGroup({
@@ -62,6 +64,8 @@ export class SignUpPage implements OnInit {
       "category_id": this.signUpForm.controls.catagary.value,
       "active": false,
       "description": this.signUpForm.controls.bio.value,
+      "email":this.signUpForm.controls.email.value,
+      "phone_no":this.signUpForm.controls.phone.value,
       "images": [
         {
           "file": {
@@ -79,7 +83,9 @@ export class SignUpPage implements OnInit {
       this.isLoading = false
 
     }, err => {
-      this.api.showToast('Something went wrong', 'error');
+      this.isLoading = false
+
+      this.api.showToast('Something went wrong', 'danger');
 
     })
 

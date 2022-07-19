@@ -68,6 +68,22 @@
                 placeholder="Enter Your Name" formControlName="name" />
             </div>
             <div class="relative md:mx-8 my-10">
+              <div class="flex absolute inset-y-0 left-0 items-center pointer-events-none">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <input type="email" id="input-group-1"
+                class="md:w-6/12 min-w-full border-b focus-within:border-teal-500 border-gray-400 focus:ring-blue-500 focus:border-blue-500 block pl-7 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter Your Email" formControlName="email" />
+            </div>
+            <div class="relative md:mx-8 my-10">
+              <div class="flex absolute inset-y-0 left-0 items-center pointer-events-none">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <input type="number" id="input-group-1"
+                class="md:w-6/12 min-w-full border-b focus-within:border-teal-500 border-gray-400 focus:ring-blue-500 focus:border-blue-500 block pl-7 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter Phone No" formControlName="phone" />
+            </div>
+            <div class="relative md:mx-8 my-10">
               <!-- <button id="dropdownDefault" data-dropdown-toggle="dropdown"
               class="md:w-6/12 min-w-full border-b text-gray-400 focus-within:border-teal-500 border-gray-400 focus:right-1 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
               type="button">
@@ -129,7 +145,7 @@
               </form>
             </div>
             <div class="flex flex-wrap sm:justify-start justify-center items-center my-8">
-              <button [disabled]="isLoading" (click)="SignUp()"
+              <button [disabled]="signUpForm.invalid|| isLoading" (click)="SignUp()"
                 class="px-12 font-medium rounded-md py-4 bg-blue-400 hover:bg-blue-500 text-white">
                 {{isLoading?'':'Submit'}} <ion-spinner *ngIf="isLoading " name="circles"></ion-spinner>
 
