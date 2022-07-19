@@ -128,14 +128,15 @@ export class HomePage implements OnInit {
       })
     };
     console.log('formData:', this.reviewForm.value)
+    console.log('option:', options)
 
-    fetch('https://api.yotpo.com/v1/widget/reviews', options)
-      .then(response => response.json())
-      .then(response => {
+    // fetch('https://api.yotpo.com/v1/widget/reviews', options)
+    //   .then(response => response.json())
+    //   .then(response => {
 
-        console.log("Api response:", response)
-      })
-      .catch(err => console.error(err));
+    //     console.log("Api response:", response)
+    //   })
+    //   .catch(err => console.error(err));
 
     this.reviewForm.reset()
     this.userRating = 0
@@ -201,5 +202,7 @@ export class HomePage implements OnInit {
       return avgRating
     }
   }
+
+ 
 
 }
