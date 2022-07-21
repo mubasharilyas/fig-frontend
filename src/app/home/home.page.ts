@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import swell from 'swell-js'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,18 +11,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class HomePage implements OnInit {
   search: String = '';
-  selectedCategory = ''
+  selectedCategory = '';
   isLoading = false;
   tags = [];
-  individauls = []
-  reviews: any[] = []
+  individauls = [];
+  reviews: any[] = [];
   averageProductReview = 0;
   userRating = 0;
   score;
-  reviewForm: FormGroup
+  reviewForm: FormGroup;
   selectedProduct_id: any;
   selectedProduct_name: any;
   @ViewChild('myModalClose') modalClose:ElementRef;
+  image: any;
   constructor(private api: ApiService) { }
 
   onChange(event) {
@@ -189,6 +191,10 @@ export class HomePage implements OnInit {
 
 
   }
+/*  showImageName(data){
+    this.image=data;
+    console.log("iamgename:",this.image);
+  }*/
   averageRatingCalculation(review) {
     let avgRating = 0;
     let total = 0;

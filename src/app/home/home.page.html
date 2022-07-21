@@ -213,8 +213,27 @@
     </a>
   </div> -->
   <!-- logo & button section end -->
-
-
+  
+  <!-- Ionic Slider -->
+  <div class="container  mx-auto px-5">
+  <carousel class="carouselImage w-96 ">
+   
+    <div *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
+      <p class="text-center  font-[cursive]">
+      {{tag.name}}</p>
+      <img class="w-full"
+        src="assets/images/Oppo (2).jpg"
+      />
+      </div>
+      
+     
+   
+    
+  </carousel>
+  <div class="text-center">
+    <p>Show : {{image}}</p>
+  </div>
+</div>
 
   <!-- footer -->
   <div class="bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 max-w-full md:h-96 h-full">

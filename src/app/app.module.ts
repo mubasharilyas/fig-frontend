@@ -9,9 +9,12 @@ import { FormsModule } from '@angular/forms';
 
 import { SignUpPageModule } from './sign-up/sign-up.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,ReactiveFormsModule,
+  imports: [BrowserModule,ReactiveFormsModule,IvyCarouselModule,
     
     HttpClientModule,
     FormsModule,
