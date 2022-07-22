@@ -29,28 +29,27 @@ export class ApiService {
       "Messages": [
         {
           "From": {
-            "Email": value.email,
-            "Name": value.firstname
+            "Email": "malikafsar594@gmail.com",
+            "Name": value.firstname + ' ' + value.lastname
           },
           "Sender": {
-            "Email": value.email,
-            "Name": value.firstname
+            "Email": "malikafsar594@gmail.com",
+            "Name": "Afsar"
           },
           "To": [
             {
               "Email": "mubasharbhatti485@gmail.com",
-              "Name": "Afsar"
+              "Name": "Mubashar"
             }
           ],
 
 
           "ReplyTo": {
-            "Email": "copilot@mailjet.com",
-            "Name": "Your Mailjet Co-pilot"
+            "Email": value.email,
+            "Name": "Contact from FIG User"
           },
-          "Subject": "For testing",
-          "TextPart": "test",
-          "HTMLPart": value.message,
+          "Subject": "Contact from FIG User",
+          "TextPart": value.message,
         }
       ]
 

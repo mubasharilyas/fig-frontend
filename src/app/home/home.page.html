@@ -7,8 +7,7 @@
     <nav class="navbar navbar-expand-lg px-4">
       <div class="block lg:hidden">
         <a href="index.html" class="navbar-brand">
-          <img src="assets/images/fig-logo.png"
-            class="sm:w-40 sm:h-24 w-28 h-20 " alt="logo" />
+          <img src="assets/images/fig-logo.png" class="sm:w-40 sm:h-24 w-28 h-20 " alt="logo" />
         </a>
       </div>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
@@ -20,17 +19,18 @@
         <ul
           class="navbar-nav text-capitalize lg:mx-auto float-left items-center md:gap-x-10 font-[Calligraffitti,cursive]">
           <li class="nav-item active">
-            <a routerLink="/contact-us" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">About
+            <a routerLink="/contact-us"
+              class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">About
               Us</a>
           </li>
           <div class="lg:block hidden">
             <a routerLink="/home" class="navbar-brand">
-              <img src="assets/images/fig-logo.png" class="w-40 h-24"
-                alt="logo" />
+              <img src="assets/images/fig-logo.png" class="w-40 h-24" alt="logo" />
             </a>
           </div>
           <li class="nav-item">
-            <a routerLink="/sign-up" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
+            <a routerLink="/sign-up"
+              class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
               Up</a>
           </li>
           <!-- <li class="nav-item">
@@ -51,7 +51,8 @@
           <input type="search" id="search-dropdown" [(ngModel)]="search" name="search"
             class="block focus:outline-none placeholder:font-[cursive] p-2.5 w-100 sm:mx-1 mx-2 z-20 text-sm text-gray-900 bg-gray-50 rounded border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
             placeholder="Search..." required="" />
-          <button type="submit" class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
+          <button type="submit"
+            class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               viewBox="0 0 24 24" class="w-6 h-6">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -68,7 +69,23 @@
   <!-- navbar end-->
 
   <!-- carousel -->
-  <div *ngIf="tags.length>0" class="max-w-full flex justify-center">
+  <div *ngIf="tags.length>0" class="container  mx-auto px-5">
+    <carousel class="carouselImage w-96 ">
+
+      <div *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
+        <p class="text-center  font-[cursive]">
+          {{tag.name}}</p>
+        <img class="w-full"
+          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
+      </div>
+
+
+
+
+    </carousel>
+
+  </div>
+  <!-- <div *ngIf="tags.length>0" class="max-w-full flex justify-center">
     <div id="carouselExampleIndicators" class="carousel slide my-20 md:w-8/12 sm:w-9/12 w-full md:mx-0 mx-3"
       data-ride="carousel">
       <ol class="carousel-indicators">
@@ -86,22 +103,7 @@
             src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
             alt="First slide" />
         </div>
-        <!-- <div class="carousel-item">
-          <p class="text-center md:text-2xl font-[cursive]">
-            Content Writing
-          </p>
-          <img class="d-block w-full h-96"
-            src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            alt="Second slide" />
-        </div>
-        <div class="carousel-item">
-          <p class="text-center md:text-2xl font-[cursive]">
-            Comfortable Zone
-          </p>
-          <img class="d-block w-full h-96"
-            src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            alt="Third slide" />
-        </div> -->
+       
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -112,7 +114,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-  </div>
+  </div> -->
   <div class="text-center">
     <ion-spinner *ngIf="isLoading && !selectedCategory && tags.length==0" name="circles"></ion-spinner>
   </div>
@@ -120,7 +122,8 @@
 
   <!-- review -->
   <div *ngIf="!isLoading && selectedCategory">
-    <div *ngFor="let individaul of individauls; let i = index;" class="mb-3" [ngClass]="i!=individauls.length-1?'border-b-2':''">
+    <div *ngFor="let individaul of individauls; let i = index;" class="mb-3"
+      [ngClass]="i!=individauls.length-1?'border-b-2':''">
       <div>
         <p class="font-[cursive] text-center md:text-2xl font-bold">
           {{individaul.name}}
@@ -142,7 +145,7 @@
             {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
           <br>
           <a href="" class="text-blue-400">Contact Link</a>
-          <div class="flex items-center justify-center" *ngIf="individaul.reviews.length>0" >
+          <div class="flex items-center justify-center" *ngIf="individaul.reviews.length>0">
             <span *ngIf="individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
               <!-- {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp; -->
               <p *ngFor="let r of individaul.reviews">{{r.content}}</p>
@@ -214,27 +217,9 @@
     </a>
   </div> -->
   <!-- logo & button section end -->
-  
+
   <!-- Ionic Slider -->
-  <div class="container  mx-auto px-5">
-  <carousel class="carouselImage w-96 ">
-   
-    <div *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
-      <p class="text-center  font-[cursive]">
-      {{tag.name}}</p>
-      <img class="w-full"
-        src="assets/images/Oppo (2).jpg"
-      />
-      </div>
-      
-     
-   
-    
-  </carousel>
-  <div class="text-center">
-    <p>Show : {{image}}</p>
-  </div>
-</div>
+
 
   <!-- footer -->
   <div class="bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500 max-w-full md:h-96 h-full">

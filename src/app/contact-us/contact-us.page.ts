@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
@@ -12,21 +12,24 @@ export class ContactUsPage implements OnInit {
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     email: new FormControl(''),
-    message:new FormControl(''),
+    message: new FormControl(''),
   });
-  constructor(private api:ApiService) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
   }
-  sendrequest(value:any)
-  {
+  sendrequest(value: any) {
     console.log(value);
-    this.api.mail(value).subscribe((data)=>{
-      console.log("response value"+data);
+    this.api.mail(value).subscribe((data) => {
+      this.api.showToast("Message sent successfully", 'success')
+    }, err => {
+
+      this.api.showToast('Something went wrong', 'danger');
+
     })
 
-    
-    
+
+
   }
 
 }
