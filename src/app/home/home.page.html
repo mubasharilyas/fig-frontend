@@ -66,25 +66,25 @@
       </div>
     </form>
   </header>
-  <!-- navbar end-->
+  navbar end
 
-  <!-- carousel -->
+  carousel
   <div *ngIf="tags.length>0" class="container  mx-auto px-5">
     <carousel class="carouselImage w-96 ">
 
-      <div *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
+       <div *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
         <p class="text-center  font-[cursive]">
           {{tag.name}}</p>
         <img class="w-full"
           src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
-      </div>
+      </div> 
 
 
 
 
     </carousel>
 
-  </div>
+  </div> -->
   <!-- <div *ngIf="tags.length>0" class="max-w-full flex justify-center">
     <div id="carouselExampleIndicators" class="carousel slide my-20 md:w-8/12 sm:w-9/12 w-full md:mx-0 mx-3"
       data-ride="carousel">

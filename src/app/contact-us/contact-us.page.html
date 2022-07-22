@@ -60,7 +60,7 @@
         </div>
       </div>
       <!-- form  -->
-      <form [formGroup]="form" (ngSubmit)="  sendrequest(form.value)"class="md:w-5/12 w-full md:mx-auto mx-5 mt-24">
+      <form [formGroup]="form" (ngSubmit)="  sendrequest(form.value);form.reset()"class="md:w-5/12 w-full md:mx-auto mx-5 mt-24">
         <h2 class="text-center font-[cursive] text-2xl font-semibold mb-10">Contact us</h2>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 sm:max-8">
@@ -79,7 +79,7 @@
             </label>
             <input
               class="appearance-none block w-full  text-gray-700 border border-cyan-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-cyan-400"
-              id="grid-last-name" type="text" placeholder="Last Name" >
+              id="grid-last-name" type="text" placeholder="Last Name" formControlName="lastname" >
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -106,9 +106,10 @@
         </div>
         <div class="flex justify-center">
 
-          <button 
+          <button [disabled]="isloader"
             class="bg-transparent hover:bg-cyan-400 text-cyan-400  hover:text-white py-2 px-16 border border-cyan-400 hover:border-transparent rounded">
-            Submit
+            <ion-spinner *ngIf="isloader " name="circles"></ion-spinner>
+            submit
           </button>
 
         </div>
