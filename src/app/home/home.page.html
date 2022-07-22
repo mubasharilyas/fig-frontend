@@ -51,14 +51,13 @@
           <input type="search" id="search-dropdown" [(ngModel)]="search" name="search"
             class="block focus:outline-none placeholder:font-[cursive] p-2.5 w-100 sm:mx-1 mx-2 z-20 text-sm text-gray-900 bg-gray-50 rounded border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
             placeholder="Search..." required="" />
-          <button type="submit"
-            class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
+          <button type="submit" class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               viewBox="0 0 24 24" class="w-6 h-6">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </button>
-          <button class="bg-blue-500 sm:block hidden px-4 py-2 font-[Mali,cursive] text-white rounded"
+          <button type="submit" class="bg-blue-500 sm:block hidden px-4 py-2 font-[Mali,cursive] text-white rounded"
             (click)="searchBytag(search,'searchbox')">
             Search
           </button>

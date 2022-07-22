@@ -25,8 +25,7 @@
         </span>
       </button>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul
-          class="navbar-nav text-capitalize lg:mx-auto float-left items-center md:gap-x-10 font-[Calligraffitti,cursive]">
+        <ul class="navbar-nav text-capitalize lg:mx-auto float-left items-center md:gap-x-10 font-[Calligraffitti,cursive]">
           <li class="nav-item active">
             <a routerLink="/contact-us"
               class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">About
@@ -68,6 +67,22 @@
                 placeholder="Enter Your Name" formControlName="name" />
             </div>
             <div class="relative md:mx-8 my-10">
+              <div class="flex absolute inset-y-0 left-0 items-center pointer-events-none">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <input type="email" id="input-group-1"
+                class="md:w-6/12 min-w-full border-b focus-within:border-teal-500 border-gray-400 focus:ring-blue-500 focus:border-blue-500 block pl-7 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter Your Email" formControlName="email" />
+            </div>
+            <div class="relative md:mx-8 my-10">
+              <div class="flex absolute inset-y-0 left-0 items-center pointer-events-none">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <input type="number" id="input-group-1"
+                class="md:w-6/12 min-w-full border-b focus-within:border-teal-500 border-gray-400 focus:ring-blue-500 focus:border-blue-500 block pl-7 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter Phone No" formControlName="phone" />
+            </div>
+            <div class="relative md:mx-8 my-10">
               <!-- <button id="dropdownDefault" data-dropdown-toggle="dropdown"
               class="md:w-6/12 min-w-full border-b text-gray-400 focus-within:border-teal-500 border-gray-400 focus:right-1 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
               type="button">
@@ -78,12 +93,15 @@
               </svg>
             </button> -->
               <!-- Dropdown menu -->
+  
               <select class="form-select" formControlName="catagary">
+                \
                 <option value="" selected disabled>Select Category</option>
                 <option *ngFor="let tag of tags; let i = index" [value]="tag.id">
                   {{tag.name}}
                 </option>
               </select>
+            
               <!-- <div id="dropdown"
               class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow md:w-6/12 min-w-full dark:bg-gray-700"
               data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" 
@@ -126,9 +144,9 @@
               </form>
             </div>
             <div class="flex flex-wrap sm:justify-start justify-center items-center my-8">
-              <button [disabled]="isLoading" (click)="SignUp()"
+              <button [disabled]="signUpForm.invalid|| isLoading" (click)="SignUp()"
                 class="px-12 font-medium rounded-md py-4 bg-blue-400 hover:bg-blue-500 text-white">
-                Submit <ion-spinner *ngIf="isLoading " name="circles"></ion-spinner>
+                {{isLoading?'':'Submit'}} <ion-spinner *ngIf="isLoading " name="circles"></ion-spinner>
 
               </button>
             </div>
@@ -137,8 +155,7 @@
         </div>
         <div class="flex items-center">
           <div class="lg:block hidden">
-            <a href="">
-              <img src="https://colorlib.com/etc/regform/colorlib-regform-7/images/signup-image.jpg" alt=""
+            <a href=""> <img src="https://colorlib.com/etc/regform/colorlib-regform-7/images/signup-image.jpg" alt=""
                 class="animate-pulse" />
             </a>
           </div>

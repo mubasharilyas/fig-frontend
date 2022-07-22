@@ -41,29 +41,27 @@ export class HomePage implements OnInit {
 
 
     console.log(localStorage.getItem('yotpo_token'))
-    if (!localStorage.getItem('yotpo_token')) {
-      const options = {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          client_id: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2',
-          client_secret: 'SaChxK7jS9KSXGhyWejR7XgDAEmtdaaaieRkI2Vn',
-          grant_type: 'client_credentials'
-        })
-      };
 
-      fetch('https://api.yotpo.com/oauth/token', options)
-        .then(response => response.json())
-        .then(response => {
-          console.log(response)
-          localStorage.setItem('yotpo_token', response.access_token);
-          this.getReviews()
-        }
-        )
-        .catch(err => console.error(err));
-    } else {
-      this.getReviews()
-    }
+    const options = {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client_id: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2',
+        client_secret: 'SaChxK7jS9KSXGhyWejR7XgDAEmtdaaaieRkI2Vn',
+        grant_type: 'client_credentials'
+      })
+    };
+
+    fetch('https://api.yotpo.com/oauth/token', options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+        localStorage.setItem('yotpo_token', response.access_token);
+        this.getReviews()
+      }
+      )
+      .catch(err => console.error(err));
+
     this.getTags()
   }
   getTags() {
@@ -98,7 +96,6 @@ export class HomePage implements OnInit {
       method: 'GET',
       headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
     };
-
     fetch('https://api.yotpo.com/v1/apps/9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2/reviews?utoken=' + localStorage.getItem('yotpo_token'), options)
       .then(response => response.json())
       .then(response => {
@@ -158,16 +155,16 @@ export class HomePage implements OnInit {
   // Initialize the client first
 
   async searchBytag(tag, from = 'slide') {
-    if (from == 'searchbox') {
-      let category = this.tags.filter(x => x.name.toLowerCase().includes(tag.toLowerCase()))[0]
-      this.selectedCategory = category ? category.name : tag;
+    // if (from == 'searchbox') {
+    //   let category = this.tags.filter(x => x.name.toLowerCase().includes(tag.toLowerCase()))
+    //   this.selectedCategory = category ? category : tag;
+    //  console.log("category:",category)
+    // }
+    // else {
+    this.selectedCategory = tag
+    this.search = ''
 
-    }
-    else {
-      this.selectedCategory = tag
-      this.search = ''
-
-    }
+    // }
     this.isLoading = true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts%3Fwhere%5Bactive%5D%3Dtrue%26category=' + this.selectedCategory).subscribe((res: any) => {
       this.individauls = res.results.map(ind => {
