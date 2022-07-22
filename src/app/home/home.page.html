@@ -7,7 +7,7 @@
     <nav class="navbar navbar-expand-lg px-4">
       <div class="block lg:hidden">
         <a href="index.html" class="navbar-brand">
-          <img src="assets/images/cb-logo.jpg"
+          <img src="assets/images/fig-logo.png"
             class="sm:w-40 sm:h-24 w-28 h-20 " alt="logo" />
         </a>
       </div>
@@ -24,19 +24,19 @@
               Us</a>
           </li>
           <div class="lg:block hidden">
-            <a href="index.html" class="navbar-brand">
-              <img src="assets/images/cb-logo.jpg" class="w-40 h-24"
+            <a routerLink="/home" class="navbar-brand">
+              <img src="assets/images/fig-logo.png" class="w-40 h-24"
                 alt="logo" />
             </a>
           </div>
           <li class="nav-item">
-            <a href="sign-up" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
+            <a routerLink="/sign-up" class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Sign
               Up</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a routerLink="/login"
               class="nav-link md:tex-2xl text-white hover:border-b-2 border-red-300 duration-100">Login</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
@@ -51,14 +51,13 @@
           <input type="search" id="search-dropdown" [(ngModel)]="search" name="search"
             class="block focus:outline-none placeholder:font-[cursive] p-2.5 w-100 sm:mx-1 mx-2 z-20 text-sm text-gray-900 bg-gray-50 rounded border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
             placeholder="Search..." required="" />
-          <button type="submit"
-            class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
+          <button type="submit" class="sm:hidden text-white bg-blue-500 sm:mr-0 mr-2 rounded px-2 block focus:outline-none focus:shadow-outline">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               viewBox="0 0 24 24" class="w-6 h-6">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </button>
-          <button class="bg-blue-500 sm:block hidden px-4 py-2 font-[Mali,cursive] text-white rounded"
+          <button type="submit" class="bg-blue-500 sm:block hidden px-4 py-2 font-[Mali,cursive] text-white rounded"
             (click)="searchBytag(search,'searchbox')">
             Search
           </button>
@@ -121,7 +120,7 @@
 
   <!-- review -->
   <div *ngIf="!isLoading && selectedCategory">
-    <div *ngFor="let individaul of individauls; let i = index;">
+    <div *ngFor="let individaul of individauls; let i = index;" class="mb-3" [ngClass]="i!=individauls.length-1?'border-b-2':''">
       <div>
         <p class="font-[cursive] text-center md:text-2xl font-bold">
           {{individaul.name}}
@@ -134,12 +133,14 @@
           </div>
         </div>
         <div class="my-4 md:mx-0 mx-3 leading-10 text-center font-[cursive]">
-          <p class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
-            {{individaul.isBioExpended?individaul.bio:individaul.bio.slice(0,100)}} &nbsp;
-            <span class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
-              (click)="individaul.isBioExpended=!individaul.isBioExpended">
-              {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
+          <p [innerHTML]="individaul.isBioExpended?individaul.description:individaul.description?individaul.description.slice(0,100):'Bio Not Provided'"
+            class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify ">
+
           </p>
+          <span *ngIf="individaul.description" class="cursor-pointer text-sm text-red-400 duration-75 animate-pulse"
+            (click)="individaul.isBioExpended=!individaul.isBioExpended">
+            {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
+          <br>
           <a href="" class="text-blue-400">Contact Link</a>
           <div class="flex items-center justify-center" *ngIf="individaul.reviews.length>0" >
             <span *ngIf="individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
@@ -188,7 +189,7 @@
 
 
           </div>
-       
+
         </div>
       </div>
     </div>
@@ -308,8 +309,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Modal</h5>
-        <button type="button" class="close" #myModalClose data-dismiss="modal" aria-label="Close">
+        <h5>Create Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

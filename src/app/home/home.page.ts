@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
   averageProductReview = 0;
   userRating = 0;
   score;
-  reviewForm: FormGroup;
+  reviewForm: FormGroup
   selectedProduct_id: any;
   selectedProduct_name: any;
   @ViewChild('myModalClose') modalClose:ElementRef;
