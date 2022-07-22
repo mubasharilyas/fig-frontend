@@ -5,7 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { NgYotpoModule } from '@ng-ecom-kit/ng-yotpo';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 
 
 @NgModule({
@@ -15,6 +17,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
     ReactiveFormsModule,
     IonicModule,
     HomePageRoutingModule,
+    IvyCarouselModule,
     NgbModule,
      NgYotpoModule.forRoot({ apiKey: '9FitVj0ljhHaoWZOrnOsgwOUbBw3ccswkjDeivu2' })
      

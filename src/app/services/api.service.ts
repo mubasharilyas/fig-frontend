@@ -59,17 +59,16 @@ export class ApiService {
 
 
 
-  showToast() {
+  showToast(message, color) {
     this.myToast = this.toast.create({
-      message: 'Ionic Auto Hide Toast on Bottom',
+      message: message,
       duration: 5000,
-      position:'top',
-      color:'success',
-      cssClass:'creat-facility-toast',
+      position: 'top',
+      color: color,
+      cssClass: 'creat-facility-toast',
 
 
     }).then((toastData) => {
-      console.log(toastData);
       toastData.present();
     });
   }

@@ -16,7 +16,7 @@ export class SignUpPage implements OnInit {
   signUpForm: FormGroup
   isLoading: boolean;
   tags: any;
- 
+
   constructor(private api: ApiService) { }
 
   ngOnInit() {
@@ -76,13 +76,17 @@ export class SignUpPage implements OnInit {
         }
       ]
     }
-  
-    console.log(data)
+
     this.api.post('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts', data).subscribe(res => {
       console.log(res)
-      // this.api.showToast();
+      this.api.showToast('Submission completed, we will notify you once approved', 'success');
       this.isLoading = false
- 
+
+    }, err => {
+      this.isLoading = false
+
+      this.api.showToast('Something went wrong', 'danger');
+
     })
 
   }
@@ -113,7 +117,7 @@ export class SignUpPage implements OnInit {
   // hideMyToast() {
   //   this.api.HideToast();
   // }
- 
+
 
 }
 
