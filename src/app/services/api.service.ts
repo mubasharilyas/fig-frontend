@@ -16,7 +16,7 @@ export class ApiService {
   mailurl = "https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fapi.mailjet.com%2Fv3.1%2Fsend"
 
   get(url: any) {
-    return this.http.get(url, { headers: this.headers })
+    return this.http.get(url)
   }
   post(url: any, data) {
     return this.http.post(url, data, { headers: this.headers })
@@ -38,8 +38,8 @@ export class ApiService {
           },
           "To": [
             {
-              "Email": "mubasharbhatti485@gmail.com",
-              "Name": "Mubashar"
+              "Email": "gborden5@gmail.com",
+              "Name": "George Borden"
             }
           ],
 

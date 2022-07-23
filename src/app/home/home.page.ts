@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit,ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import swell from 'swell-js'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   reviewForm: FormGroup
   selectedProduct_id: any;
   selectedProduct_name: any;
-  @ViewChild('myModalClose') modalClose:ElementRef;
+  @ViewChild('myModalClose') modalClose: ElementRef;
   image: any;
   constructor(private api: ApiService) { }
 
@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
     this.getTags()
   }
   getTags() {
-    this.isLoading=true
+    this.isLoading = true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fcategories').subscribe((res: any) => {
       this.tags = res.results
       console.log("tages:", this.tags)
@@ -148,12 +148,12 @@ export class HomePage implements OnInit {
 
   }
 
-  getProduct(product){
-    this.selectedProduct_id=product.id
-    this.selectedProduct_name=product.name
+  getProduct(product) {
+    this.selectedProduct_id = product.id
+    this.selectedProduct_name = product.name
 
-    console.log("product id",this.selectedProduct_id)
-    console.log("product name",this.selectedProduct_name)
+    console.log("product id", this.selectedProduct_id)
+    console.log("product name", this.selectedProduct_name)
   }
 
 
@@ -187,14 +187,18 @@ export class HomePage implements OnInit {
       })
       this.isLoading = false
 
+    }, err => {
+      this.isLoading = false;
+      console.log(err)
+      this.api.showToast("Something went wrong", "danger")
     })
 
 
   }
-/*  showImageName(data){
-    this.image=data;
-    console.log("iamgename:",this.image);
-  }*/
+  /*  showImageName(data){
+      this.image=data;
+      console.log("iamgename:",this.image);
+    }*/
   averageRatingCalculation(review) {
     let avgRating = 0;
     let total = 0;
