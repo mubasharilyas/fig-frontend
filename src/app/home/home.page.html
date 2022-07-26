@@ -1,6 +1,16 @@
 <!-- <button (click)="show()" type="button"
   class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Show</button> -->
-
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gelasio&display=swap');
+  .classNew::before{
+    
+    content: "\201c";
+    font-size: 50px;
+    font-family: 'Gelasio', serif;
+    padding-bottom: 0;
+    line-height: 0;
+  }
+</style>
 <ion-content>
 
   <header id="header" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 max-w-full max-h-screen">
@@ -40,10 +50,11 @@
         </ul>
       </div>
     </nav>
-    <div class="flex justify-center md:my-12 my-3 mx-5 heading text-center">
-      <p class="text-white font-[Mali,cursive] md:text-2xl">
-        How can we help you achieve financial independence?
+    <div class="flex justify-center flex-column mx-auto md:my-12 my-4 heading text-center sm:w-8/12 px-3 w-full ">
+      <p class="font-bold font-[Mali,cursive] md:text-2xl mb-2">
+        Unlock Your Personal Financial Independence Guide
       </p>
+      <div class="text-white font-[Mali,cursive] text-justify px-12 mb-2 mt-4" ><p class="classNew"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, exercitationem maxime dignissimos laborum qui iste illo eum delectus velit distinctio itaque. Accusamus nihil illum, animi sapiente reiciendis nostrum at beatae labore eaque officiis quidem, tempora voluptatibus veniam consequuntur ducimus, molestiae repudiandae nemo dolor? Odit iusto earum veniam architecto voluptatem impedit nisi repellat, consequatur dolorum magnam voluptas, reiciendis, error dicta beatae quibusdam odio laboriosam!</p> </div>
     </div>
     <form class="max-w-full md:pb-10 pb-8">
       <div class="flex justify-center sm:flex-nowrap flex-wrap">
@@ -66,25 +77,21 @@
       </div>
     </form>
   </header>
-  navbar end
-
-  carousel
-  <div *ngIf="tags.length>0" class="container  mx-auto px-5">
+  <div *ngIf="tags.length>0" class="container mt-5  mx-auto px-5">
     <carousel class="carouselImage w-96 ">
 
-       <div *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
+       <div  *ngFor="let tag of tags;let i = index" (click)="searchBytag(tag.name)" class="carousel-cell w-full">
+        
         <p class="text-center  font-[cursive]">
           {{tag.name}}</p>
         <img class="w-full"
           src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
-      </div> 
-
-
-
+       
+        </div> 
 
     </carousel>
 
-  </div> -->
+  </div>
   <!-- <div *ngIf="tags.length>0" class="max-w-full flex justify-center">
     <div id="carouselExampleIndicators" class="carousel slide my-20 md:w-8/12 sm:w-9/12 w-full md:mx-0 mx-3"
       data-ride="carousel">
@@ -144,7 +151,7 @@
             (click)="individaul.isBioExpended=!individaul.isBioExpended">
             {{individaul.isBioExpended?'Click for less':'Click for more'}}</span>
           <br>
-          <a href="" class="text-blue-400">Contact Link</a>
+          <a routerLink="/contact-us"  class="text-blue-400">Contact Link</a>
           <div class="flex items-center justify-center" *ngIf="individaul.reviews.length>0">
             <span *ngIf="individaul.isReviewExpended" class="md:max-w-xl leading-7 max-w-sm md:mx-5 mb-0 text-justify">
               <!-- {{individaul.isReviewExpended?individaul.reviews:individaul.reviews.slice(0,100)}} &nbsp; -->
@@ -199,7 +206,7 @@
   </div>
   <div class="text-center">
     <ion-spinner *ngIf="isLoading && selectedCategory" name="circles"></ion-spinner>
-    <div *ngIf="!isLoading && selectedCategory && individauls.length==0">No result found for {{selectedCategory}} </div>
+    <div *ngIf="!isLoading && selectedCategory && individauls.length==0">No results match of your search {{selectedCategory}} </div>
   </div>
   <!-- review end -->
 

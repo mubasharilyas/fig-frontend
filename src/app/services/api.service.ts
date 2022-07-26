@@ -38,8 +38,33 @@ export class ApiService {
           },
           "To": [
             {
-              "Email": "gborden5@gmail.com",
-              "Name": "George Borden"
+              "Email": "zaheerabbasbrw786@gmail.com",
+              "Name": "zaheer"
+            }
+          ],
+
+
+          "ReplyTo": {
+            "Email": value.email,
+            "Name": "Contact from FIG User"
+          },
+          "Subject": "Contact from FIG User",
+          "TextPart": value.message,
+        },
+
+        {
+          "From": {
+            "Email": "malikafsar594@gmail.com",
+            "Name": value.firstname + ' ' + value.lastname
+          },
+          "Sender": {
+            "Email": "malikafsar594@gmail.com",
+            "Name": "Afsar"
+          },
+          "To": [
+            {
+              "Email": value.email,
+            "Name": value.firstname
             }
           ],
 

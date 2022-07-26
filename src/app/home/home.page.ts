@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
   selectedProduct_name: any;
   @ViewChild('myModalClose') modalClose: ElementRef;
   image: any;
+  display: boolean;
   constructor(private api: ApiService) { }
 
   onChange(event) {
@@ -160,20 +161,24 @@ export class HomePage implements OnInit {
   // Initialize the client first
 
   async searchBytag(tag, from = 'slide') {
+    
     if (from == 'searchbox') {
+
       let category = this.tags.filter(x => x.name.includes(tag))[0]
       this.selectedCategory = category ? category.name : tag;
+      
 
     }
     else {
       this.selectedCategory = tag
-      this.search = ''
+      this.search = '';
 
     }
+    
     this.isLoading = true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts?category=' + this.selectedCategory).subscribe((res: any) => {
       this.individauls = res.results.map(ind => {
-        ind.reviews = this.reviews.filter(x => x.sku == ind.id)
+        ind.reviews = [];
         ind.slicedReviews = ind.reviews.slice(0, 2)
         console.log("reviews:", ind.reviews)
         ind.averageProductReview = this.averageRatingCalculation(ind.reviews)
@@ -185,6 +190,7 @@ export class HomePage implements OnInit {
         ind.isReviewExpended = false
         return ind;
       })
+      
       this.isLoading = false
 
     }, err => {

@@ -83,7 +83,7 @@ export class SignUpPage implements OnInit {
       this.isLoading = false
 
     }, err => {
-      this.isLoading = false
+     // this.isLoading = false
 
       this.api.showToast('Something went wrong', 'danger');
 
