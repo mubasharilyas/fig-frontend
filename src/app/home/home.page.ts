@@ -178,7 +178,7 @@ export class HomePage implements OnInit {
     this.isLoading = true
     this.api.get('https://cdn.builder.codes/api/v1/proxy-api?url=https%3A%2F%2Fpersonal-fig%3Aklb655IIBPUJUCFNBVgRbRZUrim8oTzV%40api.swell.store%2Fproducts?category=' + this.selectedCategory).subscribe((res: any) => {
       this.individauls = res.results.map(ind => {
-        ind.reviews = [];
+        ind.reviews = this.reviews.filter(x => x.sku == ind.id);
         ind.slicedReviews = ind.reviews.slice(0, 2)
         console.log("reviews:", ind.reviews)
         ind.averageProductReview = this.averageRatingCalculation(ind.reviews)

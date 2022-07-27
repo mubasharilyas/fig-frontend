@@ -19,7 +19,7 @@ export class ApiService {
     return this.http.get(url)
   }
   post(url: any, data) {
-    return this.http.post(url, data, { headers: this.headers })
+    return this.http.post(url, data)
 
   }
   mail(value: any) {
@@ -50,32 +50,9 @@ export class ApiService {
           },
           "Subject": "Contact from FIG User",
           "TextPart": value.message,
-        },
-
-        {
-          "From": {
-            "Email": "malikafsar594@gmail.com",
-            "Name": value.firstname + ' ' + value.lastname
-          },
-          "Sender": {
-            "Email": "malikafsar594@gmail.com",
-            "Name": "Afsar"
-          },
-          "To": [
-            {
-              "Email": value.email,
-            "Name": value.firstname
-            }
-          ],
-
-
-          "ReplyTo": {
-            "Email": value.email,
-            "Name": "Contact from FIG User"
-          },
-          "Subject": "Contact from FIG User",
-          "TextPart": value.message,
         }
+
+
       ]
 
     }, { headers: this.headers })
