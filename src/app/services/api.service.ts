@@ -25,7 +25,7 @@ export class ApiService {
   mail(value: any) {
     return this.http.post(this.mailurl, {
 
-      "SandboxMode": false,
+      "SandboxMode":false,
       "Messages": [
         {
           "From": {
@@ -38,8 +38,8 @@ export class ApiService {
           },
           "To": [
             {
-              "Email": "zaheerabbasbrw786@gmail.com",
-              "Name": "zaheer"
+              "Email": "asifali94876@gmail.com",
+            "Name": "Asif"
             }
           ],
 
@@ -50,6 +50,27 @@ export class ApiService {
           },
           "Subject": "Contact from FIG User",
           "TextPart": value.message,
+        },
+
+        {
+          "From": {
+            "Email": "malikafsar594@gmail.com",
+            "Name": value.firstname + ' ' + value.lastname
+          },
+          // "Sender": {
+          //    "Email": "malikafsar594@gmail.com",
+          //    "Name": "Afsar"
+          //  },
+          "To": [
+            {
+              "Email":value.email,
+              "Name": "Afsar"
+            }
+          ],
+
+
+          "Subject": "Response from FIG",
+          "TextPart":"We will contact you soon",
         }
 
 
